@@ -1,13 +1,13 @@
 {
-  "name": "order-e2e",
+  "name": "orders-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["order"],
+  "implicitDependencies": ["orders"],
   "targets": {
     "e2e": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/order-e2e/jest.config.ts",
+        "jestConfig": "apps/orders-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,7 +15,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/order-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/orders-e2e/**/*.{js,ts}"]
       }
     }
   }

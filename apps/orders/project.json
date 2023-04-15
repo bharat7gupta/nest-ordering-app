@@ -1,7 +1,7 @@
 {
-  "name": "order",
+  "name": "orders",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/order/src",
+  "sourceRoot": "apps/orders/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,12 +11,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/order",
-        "main": "apps/order/src/main.ts",
-        "tsConfig": "apps/order/tsconfig.app.json",
-        "assets": ["apps/order/src/assets"],
+        "outputPath": "dist/apps/orders",
+        "main": "apps/orders/src/main.ts",
+        "tsConfig": "apps/orders/tsconfig.app.json",
+        "assets": ["apps/orders/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/order/webpack.config.js"
+        "webpackConfig": "apps/orders/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -27,14 +27,14 @@
       "executor": "@nrwl/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "order:build"
+        "buildTarget": "orders:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "order:build:development"
+          "buildTarget": "orders:build:development"
         },
         "production": {
-          "buildTarget": "order:build:production"
+          "buildTarget": "orders:build:production"
         }
       }
     },
@@ -42,14 +42,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/order/**/*.ts"]
+        "lintFilePatterns": ["apps/orders/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/order/jest.config.ts",
+        "jestConfig": "apps/orders/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
