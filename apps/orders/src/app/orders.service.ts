@@ -1,18 +1,40 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { Order } from './schemas/order.schema';
 import { OrdersRepository } from './orders.repository';
-import { InjectModel } from '@nestjs/mongoose';
+import { BILLING_SERVICE } from './constants/service';
+import { ClientProxy } from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class OrdersService {
-  constructor(@InjectModel(Order.name) private readonly ordersRepository: OrdersRepository) {}
-  
+  constructor(
+    private readonly ordersRepository: OrdersRepository,
+    @Inject(BILLING_SERVICE) private billingClient: ClientProxy
+  ) {}
+
   async getOrders(): Promise<Order[]> {
     return this.ordersRepository.find({});
   }
 
   async createOrder(createOrderDto: CreateOrderDto) {
-    this.ordersRepository.create(createOrderDto);
+    const session = await this.ordersRepository.startTransaction();
+
+    try {
+      const order = this.ordersRepository.create(createOrderDto, { session });
+
+      await lastValueFrom(
+        this.billingClient.emit('ORDER_CREATED', {
+          order: createOrderDto
+        })
+      );
+
+      await session.commitTransaction();
+
+      return order;
+    } catch (error) {
+      await session.abortTransaction();
+      throw error;
+    }
   }
 }
