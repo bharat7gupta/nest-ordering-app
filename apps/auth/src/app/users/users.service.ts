@@ -4,13 +4,16 @@ import { UsersRepository } from "./users.repository";
 import { User } from "./schema/user.schema";
 import { UpdateUserDto } from "./dto/update-user.dto";
 
-
 @Injectable()
 export class UsersService {
     constructor(private readonly usersRepository: UsersRepository) {}
 
     async getUserById(userId: string): Promise<User> {
         return this.usersRepository.findOne({ userId });
+    }
+
+    async getUserByEmail(email: string): Promise<User> {
+        return this.usersRepository.findOne({ email });
     }
 
     async getUsers(): Promise<User[]> {

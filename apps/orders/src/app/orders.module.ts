@@ -3,7 +3,6 @@ import * as Joi from 'joi';
 
 import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
-import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule, RmqModule } from '@app/common';
 import { MongooseModule } from '@nestjs/mongoose';
