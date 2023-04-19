@@ -16,7 +16,16 @@
         "tsConfig": "apps/orders/tsconfig.app.json",
         "assets": ["apps/orders/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/orders/webpack.config.js"
+        "webpackConfig": "apps/orders/webpack.config.js",
+        "tsPlugins": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": false,
+              "introspectComments": true
+            }
+          }
+        ]
       },
       "configurations": {
         "development": {},
